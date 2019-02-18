@@ -19,7 +19,14 @@ Vue.component('search-page', {
                             <img class="card-img-top" v-bind:src="post.posting.image">
                             <h5 class="card-title">{{post.title}}</h5>
                             <p class="card-text" v-html="post.posting.posting"></p>
-                            <p>{{post.posting.tags}}</p>
+                            <div >
+                            <ul style="display:inline" v-for="tag in post.posting.tags">
+                                <li style="display:inline">
+                                    <button>{{tag}}</button>
+                                </li>
+                            </ul></div>
+                            </div>
+                         
                         </div>
                     </div>
                 </li>
