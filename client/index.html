@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/vueWysiwyg.css">
+
+    <!-- include libraries(jQuery, bootstrap) -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+
+    <!-- googel signin -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="994783709716-0lg3hdbhdp2a8glo3n14nciuamav875e.apps.googleusercontent.com">
+</head>
+
+<body>
+
+    <div id="app">
+
+
+        <!-- login form  -->
+       <login-form 
+            v-if="isLogin == false && signup == false"
+            @success-login="successLogin"
+            @signup="signUp">
+        </login-form>
+
+       <signup-form v-if="signup == true" @success-register="successRegister"></signup-form>
+        <!-- main page -->
+
+        <div v-if="isLogin == true">
+            <navbar :postings="postings"
+                    @search-box="searchBox">
+            </navbar>
+           
+            <div class="container-fluid">
+                <div class="row">
+                    
+                    <side-nav-page 
+                        @archieve-page="headingToArchieve"
+                        @create-page="headingToCreate"
+                        @home-page="headingToHome" >
+
+                      
+                    </side-nav-page>
+                   
+                    <main-page
+                        :postings="postings"
+                        :user-postings="userPostings"
+                        :current-page="currentPage" 
+                        :search-posting="searchPosting"
+                        @to-edit-page="toEditPage"
+                        @reload-data="reloadData"
+                        @done-create="doneCreate">
+                    </main-page>
+                   
+                    <profile-page
+                        :profile-user="profile">
+                    </profile-page>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/vueWysiwyg.js"></script>
+    <script src="./component/signup.js"></script>
+    <script src="./component/mainpageComponent/mainPageHome.js"></script>
+    <script src="./component/profilePage.js"></script>
+    <script src="./component/mainpageComponent/mainPageSearch.js"></script>
+    <script src="./component/mainpageComponent/mainPageEdit.js"></script>
+    <script src="./component/mainpageComponent/mainPageArchieve.js"></script>
+    <script src="./component/mainpageComponent/mainPageCreate.js"></script>
+    <script src="./component/sidePage.js"></script>
+    <script src="./component/login.js"></script>
+    <script src="./component/navbar.js"></script>
+    <script src="./component/mainPage.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
